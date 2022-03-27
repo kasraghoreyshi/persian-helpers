@@ -75,6 +75,7 @@ Convert a number to Persian digits with digit separator
 
 ```javascript
 convertDigits(1000, { separator: true }); // "۱٬۰۰۰"
+convertDigits("مبلغ این محصول 950000 تومان می باشد.", { separator: true }); // "مبلغ این محصول ۹۵۰٬۰۰۰ تومان می باشد."
 ```
 
 Convert a number to Persian digits with custom digit separator
