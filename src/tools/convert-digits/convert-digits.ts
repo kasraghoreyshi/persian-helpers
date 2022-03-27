@@ -19,7 +19,7 @@ const stringHandler = (input: any, to: ConvertDigitsOptions['to']) => {
   return input.replace(regex, (index: number) => {
     return to === 'fa'
       ? persianDigits[index]
-      : persianDigits.indexOf(index.toString()) > 0
+      : persianDigits.indexOf(index.toString()) >= 0
       ? persianDigits.indexOf(index.toString())
       : index;
   });

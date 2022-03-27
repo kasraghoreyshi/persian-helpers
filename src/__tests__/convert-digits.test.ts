@@ -5,7 +5,7 @@ test('Convert Number To Persian String', () => {
 });
 
 test('Convert Number To English String', () => {
-  expect(convertDigits('۱۲۳ test ۴۵۶', { to: 'en' })).toBe('123 test 456');
+  expect(convertDigits('۱۲۳۰ test ۴۵۶', { to: 'en' })).toBe('1230 test 456');
 });
 
 test('Convert Number To Persian String separated With Commas', () => {
