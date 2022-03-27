@@ -164,4 +164,4 @@ Contributions to Persian Helpers are greatly appreciated. To contribute:
 5. Open a Pull Request
 
 ## License
-Persian Helpers is licensed under the MIT License. Visit [LICENSE.md](https://github.com/kasraghoreyshi/persian-helpers/blob/master/LICENSE) for more information.
+Persian Helpers is licensed under the MIT License. Visit [LICENSE.md](https://github.com/kasraghoreyshi/persian-helpers/blob/main/LICENSE) for more information.
