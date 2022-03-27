@@ -1,6 +1,6 @@
 {
   "name": "persian-helpers",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A set of persian helpers for Javascript to make your life easier.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -32,6 +32,10 @@
     "email": "kasra.ghoreyshi84@gmail.com"
   },
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kasraghoreyshi/persian-helpers.git"
+  },
   "devDependencies": {
     "@types/jest": "^27.4.1",
     "jest": "^27.5.1",

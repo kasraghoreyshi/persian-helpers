@@ -1,7 +1,13 @@
 import { separatorHandlerDefaultOptions, SeparatorHandlerOptions } from '.';
 import { getDefaultOptions } from '../../getDefaultOptions';
 
-export const separatorHandler = (input: string | number, optionsParam?: SeparatorHandlerOptions) => {
+/**
+ * Seperate digits in a persian | english string | number
+ * @example
+ * // returns "۱,۰۰۰,۰۰۰"
+ * seperateDigitsBySeparator("۱۰۰۰۰۰۰");
+ */
+export const seperateDigitsBySeparator = (input: string | number, optionsParam?: SeparatorHandlerOptions) => {
   const options = getDefaultOptions(optionsParam, separatorHandlerDefaultOptions);
   if (typeof input === 'number') return input.toLocaleString();
 
@@ -18,12 +24,3 @@ export const separatorHandler = (input: string | number, optionsParam?: Separato
   });
   return output;
 };
-
-// Just an alias
-/**
- * Seperate digits in a persian | english string | number
- * @example
- * // returns "۱,۰۰۰,۰۰۰"
- * seperateDigitsBySeparator("۱۰۰۰۰۰۰");
- */
-export const seperateDigitsBySeparator = separatorHandler;
