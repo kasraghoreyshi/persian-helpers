@@ -1,12 +1,12 @@
-import seperateDigitsBySeparator from '../tools/digits-separator';
+import separateDigitsBySeparator from '../tools/digits-separator';
 
-test('Seperate Digits By Comma In A String', () => {
-  expect(seperateDigitsBySeparator('۱۰۰۰۰۰۰', { separator: ',' })).toBe('۱,۰۰۰,۰۰۰');
+test('separate Digits By Comma In A String', () => {
+  expect(separateDigitsBySeparator('۱۰۰۰۰۰۰', { separator: ',' })).toBe('۱,۰۰۰,۰۰۰');
 });
 
-test('Seperate Digits By Comma In A String With Letters', () => {
+test('separate Digits By Comma In A String With Letters', () => {
   expect(
-    seperateDigitsBySeparator('مبلغ این محصول ۱۰۰۰۰۰۰ تومان می باشد.', {
+    separateDigitsBySeparator('مبلغ این محصول ۱۰۰۰۰۰۰ تومان می باشد.', {
       separator: ',',
     }),
   ).toBe('مبلغ این محصول ۱,۰۰۰,۰۰۰ تومان می باشد.');

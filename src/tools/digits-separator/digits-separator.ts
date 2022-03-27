@@ -2,12 +2,12 @@ import { separatorHandlerDefaultOptions, SeparatorHandlerOptions } from '.';
 import { getDefaultOptions } from '../../getDefaultOptions';
 
 /**
- * Seperate digits in a persian | english string | number
+ * separate digits in a persian | english string | number
  * @example
  * // returns "۱,۰۰۰,۰۰۰"
- * seperateDigitsBySeparator("۱۰۰۰۰۰۰");
+ * separateDigitsBySeparator("۱۰۰۰۰۰۰");
  */
-export const seperateDigitsBySeparator = (input: string | number, optionsParam?: SeparatorHandlerOptions) => {
+export const separateDigitsBySeparator = (input: string | number, optionsParam?: SeparatorHandlerOptions) => {
   const options = getDefaultOptions(optionsParam, separatorHandlerDefaultOptions);
   if (typeof input === 'number') return input.toLocaleString();
 
@@ -19,7 +19,7 @@ export const seperateDigitsBySeparator = (input: string | number, optionsParam?:
   if (!input.match(numberRegex)) return input;
   output = output.replace(numberRegex, (match) => {
     // This regex is a modification for https://stackoverflow.com/a/25377176
-    // It seperates everything 3 digit/letter by digit/letter.
+    // It separates everything 3 digit/letter by digit/letter.
     return match.replace(/(.)(?=(.{3})+(?!.))/g, `$1${options.separator}`);
   });
   return output;

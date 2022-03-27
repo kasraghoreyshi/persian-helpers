@@ -8,11 +8,11 @@ test('Convert Number To English String', () => {
   expect(convertDigits('۱۲۳ test ۴۵۶', { to: 'en' })).toBe('123 test 456');
 });
 
-test('Convert Number To Persian String Seperated With Commas', () => {
+test('Convert Number To Persian String separated With Commas', () => {
   expect(convertDigits(123456789, { separator: '٬' })).toBe('۱۲۳٬۴۵۶٬۷۸۹');
 });
 
-test('Convert Number To Persian String Seperated With Custom Separator', () => {
+test('Convert Number To Persian String separated With Custom Separator', () => {
   expect(convertDigits(123456789, { separator: '-' })).toBe('۱۲۳-۴۵۶-۷۸۹');
 });
 

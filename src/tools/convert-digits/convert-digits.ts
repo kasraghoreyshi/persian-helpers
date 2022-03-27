@@ -1,6 +1,6 @@
 import { convertDigitsDefaultOptions, ConvertDigitsInput, ConvertDigitsOptions } from '.';
 import { getDefaultOptions } from '../../getDefaultOptions';
-import seperateDigitsBySeparator from '../digits-separator';
+import separateDigitsBySeparator from '../digits-separator';
 
 const persianDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
 
@@ -64,7 +64,7 @@ export const convertDigits = (input: ConvertDigitsInput, optionsParam?: ConvertD
     case 'string':
       const stringResult = stringHandler(input, options.to);
       if (options.separator)
-        return seperateDigitsBySeparator(stringResult, {
+        return separateDigitsBySeparator(stringResult, {
           separator: options.separator as string,
         });
       return stringResult;
