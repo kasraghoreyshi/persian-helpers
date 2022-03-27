@@ -118,7 +118,7 @@ separateDigitsBySeparator('مبلغ این محصول ۱۰۰۰۰۰۰ تومان 
 
 > Note: separateDigitsBySeparator also works with English digits or a string mixed with English and Persian digits
 
-### Generate Persian English slugs based on a string
+### Generate Persian or English slugs based on a string
 
 | Options                         | Description                              | Default value |
 | ------------------------------- | ---------------------------------------- | ------------- |
