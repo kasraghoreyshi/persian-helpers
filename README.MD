@@ -14,6 +14,8 @@
 
   - [Usage](#usage)
 
+    - [Importing Persian Helpers](#importing-persian-helpers)
+    - 
     - [Converting English digits to Persian or vice versa](#converting-english-digits-to-persian-or-vice-versa)
 
     - [Separating Persian or English digits in a string or number by commas or any separator](#separating-persian-or-english-digits-in-a-string-or-number-by-commas-or-any-separator)
@@ -35,6 +37,18 @@ Yarn:
 `yarn add persian-helpers`
 
 ## Usage
+
+### Importing Persian Helpers:
+
+```javascript
+import * as persianHelpers from "persian-helpers";
+// Or alternatively
+import { convertDigits } from "persian-helpers";
+
+console.log(persianHelpers.convertDigits("1000"));
+// Or
+console.log(convertDigits("1000"));
+```
 
 ### Converting English digits to Persian or vice versa
 
