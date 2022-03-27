@@ -1,6 +1,6 @@
 # Persian Helpers
 
-> Persian Helpers is a minimal package with a set of helpers/tools specifically for the Persian/Farsi language.
+> Persian Helpers is a minimal Javascript package with a set of helpers/tools specifically for the Persian/Farsi language.
 
 >
 
@@ -148,3 +148,6 @@ Contributions to Persian Helpers are greatly appreciated. To contribute:
 3. Commit your Changes (`git commit -m 'Add a NewHelper'`)
 4. Push to the Branch (`git push origin feature/NewHelper`)
 5. Open a Pull Request
+
+## License
+Persian Helpers is licensed under the MIT License. Visit [LICENSE.md](https://github.com/kasraghoreyshi/persian-helpers/blob/master/LICENSE) for more information.
