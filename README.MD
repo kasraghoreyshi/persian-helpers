@@ -1,6 +1,6 @@
 # Persian Helpers
 
-> Persian Helpers is a minimal Javascript package with a set of helpers/tools specifically for the Persian/Farsi language.
+> Persian Helpers is a minimal NodeJS package with a set of helpers/tools specifically for the Persian/Farsi language.
 
 >
 
@@ -75,6 +75,7 @@ Convert a number to Persian digits with digit separator
 
 ```javascript
 convertDigits(1000, { separator: true }); // "۱٬۰۰۰"
+convertDigits("مبلغ این محصول 950000 تومان می باشد.", { separator: true }); // "مبلغ این محصول ۹۵۰٬۰۰۰ تومان می باشد."
 ```
 
 Convert a number to Persian digits with custom digit separator
@@ -117,7 +118,7 @@ separateDigitsBySeparator('مبلغ این محصول ۱۰۰۰۰۰۰ تومان 
 
 > Note: separateDigitsBySeparator also works with English digits or a string mixed with English and Persian digits
 
-### Generate Persian English slugs based on a string
+### Generate Persian or English slugs based on a string
 
 | Options                         | Description                              | Default value |
 | ------------------------------- | ---------------------------------------- | ------------- |
