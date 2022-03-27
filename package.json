@@ -1,6 +1,6 @@
 {
   "name": "persian-helpers",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A set of persian helpers for Javascript to make your life easier.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
