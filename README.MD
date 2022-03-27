@@ -66,7 +66,7 @@ convertDigits(1000); // "۱۰۰۰"
 Convert a number to English digits
 
 ```javascript
-convertDigits('۱۲۳۴'); // "1234"
+convertDigits("۱۲۳۴", { to: "en" }); // "1234"
 ```
 
 Convert a number to Persian digits with digit separator
