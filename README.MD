@@ -30,7 +30,7 @@
 
 NPM:
 
-`npm install persian-helpers`
+`npm install persian-helpers --save`
 
 Yarn:
 
