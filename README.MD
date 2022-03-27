@@ -4,7 +4,7 @@
 
   
 
-> Persian Helpers is a minimal package with a set of helpers/tools specifically for the Persian/Farsi language.
+> Persian Helpers is a minimal Javascript package with a set of helpers/tools specifically for the Persian/Farsi language.
 
 >
 
