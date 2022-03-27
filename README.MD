@@ -15,7 +15,7 @@
   - [Usage](#usage)
 
     - [Importing Persian Helpers](#importing-persian-helpers)
-    - 
+    
     - [Converting English digits to Persian or vice versa](#converting-english-digits-to-persian-or-vice-versa)
 
     - [Separating Persian or English digits in a string or number by commas or any separator](#separating-persian-or-english-digits-in-a-string-or-number-by-commas-or-any-separator)
