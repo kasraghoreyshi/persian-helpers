@@ -13,4 +13,6 @@ export const convertDigitsDefaultOptions: ConvertDigitsOptions = {
   separator: undefined,
 };
 
+export const defaultSeparator = '٬';
+
 export default convertDigits;

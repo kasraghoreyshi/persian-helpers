@@ -1,4 +1,4 @@
-import { convertDigitsDefaultOptions, ConvertDigitsInput, ConvertDigitsOptions } from '.';
+import { convertDigitsDefaultOptions, ConvertDigitsInput, ConvertDigitsOptions, defaultSeparator } from '.';
 import { getDefaultOptions } from '../../getDefaultOptions';
 import separateDigitsBySeparator from '../digits-separator';
 
@@ -59,7 +59,7 @@ export const convertDigits = (input: ConvertDigitsInput, optionsParam?: ConvertD
   const options: ConvertDigitsOptions = getDefaultOptions(optionsParam, convertDigitsDefaultOptions);
   // separator = true is just a shorthand for "٬"
   // So therefore, we need to set it here.
-  if (optionsParam?.separator === true) options.separator = '٬';
+  if (optionsParam?.separator === true) options.separator = defaultSeparator;
   switch (typeof input) {
     case 'string':
       const stringResult = stringHandler(input, options.to);
