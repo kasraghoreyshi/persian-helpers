@@ -31,7 +31,7 @@ const handleNumbersSmallerThanOneThousand = (input: number, level: number) => {
 const handleNumbersLargerThanOneThousand = (input: number, level: number) => {
   const digits: any = { 1000000: 'هزار', 1000000000: 'میلیون', 1000000000000: 'میلیارد', 1000000000000000: 'تریلیارد' };
   // Above we have an object containing the names of each x length
-  const inputDigitName: any = Object.keys(digits).find((digitsLength) => input < parseInt(digitsLength));
+  const inputDigitName: any = Object.keys(digits).find((digitsLength) => input < Number(digitsLength));
   if (!inputDigitName) return '';
   // We need to divide the number by 1000 to get the previous digit
   // So that the function could go backwards until it reaches smaller than one thousand
@@ -51,7 +51,7 @@ const convertDigitsToWordsHandler = (input: string | number, level: number = 0):
   // We use - 0 instead of parseInt because parseInt on an input like "38rijfdifhiodfh" will return 38
   // While in this case, we won't count that as a valid input. So - 0 still converts an input like "38"
   // To number, but returns NaN in the case of some input like "38rijfdifhiodfh".
-  let inputNumber: number = convertDigits(input, { to: 'en' }) - 0;
+  const inputNumber: number = convertDigits(input, { to: 'en' }) - 0;
 
   // We should check if the input is valid and the easiest
   // And fastest way to do that is through isNaN. If the given input got converted from
@@ -69,7 +69,7 @@ const convertDigitsToWordsHandler = (input: string | number, level: number = 0):
   // So therefore a recrusion must happend but not with the negative number but the positive number
   if (inputNumber < 0) return 'منفی ' + convertDigitsToWordsHandler(Math.abs(inputNumber), level);
 
-  let result = [];
+  const result = [];
 
   if (level > 0) {
     // Push an empty element first so that when joined, it becomes x و y
