@@ -8,8 +8,13 @@ import { getDefaultOptions } from '../../getDefaultOptions';
  * separateDigitsBySeparator("۱۰۰۰۰۰۰");
  */
 export const separateDigitsBySeparator = (input: string | number, optionsParam?: SeparatorHandlerOptions) => {
-  const options = getDefaultOptions(optionsParam, separatorHandlerDefaultOptions);
-  if (typeof input === 'number') return input.toLocaleString();
+  const options: SeparatorHandlerOptions = getDefaultOptions(optionsParam, separatorHandlerDefaultOptions);
+
+  if (typeof input === 'number') {
+    const numberOutput = input.toLocaleString();
+    const separator = (options.separator as string) || '';
+    return numberOutput.replace(/٬|,/g, separator);
+  }
 
   // This regex matches any english numbers using \d and also matches
   // Any Persian number using \u06F0-\u06F90-9
