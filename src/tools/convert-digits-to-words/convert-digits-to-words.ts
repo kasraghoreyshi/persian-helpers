@@ -4,6 +4,7 @@
 import {
   convertDigitsToWordsDefaultOptions,
   ConvertDigitsToWordsOptions,
+  decimals,
   hundreds,
   ones,
   ordinalOnes,
@@ -12,6 +13,17 @@ import {
 } from '.';
 import { getDefaultOptions } from '../../getDefaultOptions';
 import convertDigits from '../convert-digits';
+
+const handleInvalidInput = (
+  input: number | string,
+  throwErrorIfInvalid: ConvertDigitsToWordsOptions['throwErrorIfInvalid'],
+) => {
+  // If it is specified to throw error at invalid inputs, we will throw an error.
+  if (throwErrorIfInvalid) throw new Error(`Cannot convert "${input}" to words.`);
+  // Otherwise we return undefined early to avoid the ordinal checks to happen below
+  // Since they will be unnecessary.
+  return undefined;
+};
 
 const handleNumbersSmallerThanOneThousand = (input: number, level: number) => {
   switch (true) {
@@ -122,22 +134,41 @@ export const convertDigitsToWords = (
 ): string | undefined => {
   const options: ConvertDigitsToWordsOptions = getDefaultOptions(optionsParam, convertDigitsToWordsDefaultOptions);
 
+  // Any type other than number and string is invalid and cannot be converted to words.
+  if (typeof input !== 'number' && typeof input !== 'string')
+    return handleInvalidInput(input, options.throwErrorIfInvalid);
+
   // The handler is a separate function because the level argument in the handler is something internal that
   // The user should not access/modify.
-  const result = convertDigitsToWordsHandler(input);
+  let result = convertDigitsToWordsHandler(input);
+  let decimalResult;
+  let decimalSuffix;
 
-  // If the result is less than 1 character, it means that there was no result.
-  if (result.length < 1) {
-    // If it is specified to throw error at invalid inputs, we will throw an error.
-    if (options.throwErrorIfInvalid) throw new Error(`Cannot convert "${input}" to words.`);
-    // Otherwise we return undefined early to avoid the ordinal checks to happen below
-    // Since they will be unnecessary.
-    return undefined;
+  const inputString = input.toString();
+  // If the number contains dot, it means that it's a decimal.
+  if (inputString.includes('.')) {
+    const indexOfDecimal = inputString.indexOf('.');
+    // indexOfDecimal plus one must be used because we want the digits after the dot
+    const digitsAfterDecimal = inputString.substring(indexOfDecimal + 1, indexOfDecimal + decimals.length + 1);
+    const digitsBeforeDecimal = inputString.substring(0, indexOfDecimal);
+    // This checks if the digitsAfterDecimal is not 0 by converting it to a number.
+    // For example, if given "1.0000", it will still be counted as a single 0.
+    if (Number(digitsAfterDecimal) !== 0) {
+      result = convertDigitsToWordsHandler(digitsBeforeDecimal);
+      decimalResult = convertDigitsToWordsHandler(digitsAfterDecimal);
+      decimalSuffix = decimals[digitsAfterDecimal.length - 1];
+    }
   }
 
+  // If the result is less than 1 character, it means that there was no result.
+  if (result.length < 1) return handleInvalidInput(input, options.throwErrorIfInvalid);
+
+  if (decimalResult) result += ` ممیز ${decimalResult} ${decimalSuffix}`;
+
   // For zero and negative numbers, ordinal is meaningless. (For example منفی دوم is meaningless)
+  // For decimal numbers, ordinal is also meaningless.
   // So we just return the cardinal number if that is the case.
-  if (options.ordinal !== true || input <= 0) return result;
+  if (options.ordinal !== true || input <= 0 || decimalResult !== undefined) return result;
 
   const resultSplit = result.split(' ');
 
