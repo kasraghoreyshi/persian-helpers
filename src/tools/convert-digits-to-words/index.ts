@@ -23,8 +23,9 @@ export const tensBelowTwenty = [
   'پانزده',
   'شانزده',
   'هفده',
-  'هیجده',
+  'هجده',
   'نوزده',
 ];
+export const decimals = ['دهم', 'صدم', 'هزارم', 'ده هزارم', 'صد هزارم', 'میلیونیم'];
 
 export default convertDigitsToWords;

@@ -299,6 +299,7 @@ Generate words from a number
 ```javascript
 
 convertDigitsToWords(1234) // "یک هزار و دویست و سی و چهار"
+convertDigitsToWords(1234.121) // "یک هزار و دویست و سی و چهار ممیز یکصد و بیست و یک هزارم"
 convertDigitsToWords(99999) // "نود و نه هزار و نهصد و نود و نه"
 
 ```
