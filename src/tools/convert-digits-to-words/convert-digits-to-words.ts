@@ -56,10 +56,6 @@ const handleNumbersLargerThanOneThousand = (input: number, level: number) => {
 };
 
 const convertDigitsToWordsHandler = (input: string | number, level: number = 0): string => {
-  if (typeof input !== 'number' && typeof input !== 'string') {
-    return '';
-  }
-
   // We use - 0 instead of parseInt because parseInt on an input like "38rijfdifhiodfh" will return 38
   // While in this case, we won't count that as a valid input. So - 0 still converts an input like "38"
   // To number, but returns NaN in the case of some input like "38rijfdifhiodfh".
@@ -71,6 +67,28 @@ const convertDigitsToWordsHandler = (input: string | number, level: number = 0):
   // Whole function is pointless. So we return early
   if (isNaN(inputNumber)) return '';
 
+  let digitsBeforeDecimal: number | null = null;
+  let decimalResult;
+  let decimalSuffix;
+
+  const inputString = inputNumber.toString();
+  // If the number contains dot, it means that it's a decimal.
+  if (inputString.includes('.')) {
+    const indexOfDecimal = inputString.indexOf('.');
+    // indexOfDecimal plus one must be used because we want the digits after the dot
+    const digitsAfterDecimal = inputString.substring(indexOfDecimal + 1, indexOfDecimal + decimals.length + 1);
+    digitsBeforeDecimal = Number(inputString.substring(0, indexOfDecimal));
+
+    // This checks if the digitsAfterDecimal is not 0 by converting it to a number.
+    // For example, if given "1.0000", it will still be counted as a single 0.
+    if (Number(digitsAfterDecimal) !== 0) {
+      decimalResult = convertDigitsToWordsHandler(digitsAfterDecimal);
+      decimalSuffix = decimals[digitsAfterDecimal.length - 1];
+    }
+  }
+
+  const result = [];
+
   // If the input is 0 and the level is also 0, we return صفر
   // Otherwise we return empty string
   // Because if the level is more than 0 but the input is zero, for the number "100"
@@ -80,8 +98,6 @@ const convertDigitsToWordsHandler = (input: string | number, level: number = 0):
   // And if the number is negative, only prefixing منفی will be enough.
   // So therefore a recrusion must happend but not with the negative number but the positive number
   if (inputNumber < 0) return 'منفی ' + convertDigitsToWordsHandler(Math.abs(inputNumber), level);
-
-  const result = [];
 
   if (level > 0) {
     // Push an empty element first so that when joined, it becomes x و y
@@ -93,10 +109,17 @@ const convertDigitsToWordsHandler = (input: string | number, level: number = 0):
 
   let inputResult: string;
 
-  if (inputNumber < 1000) inputResult = handleNumbersSmallerThanOneThousand(inputNumber, level);
-  else inputResult = handleNumbersLargerThanOneThousand(inputNumber, level);
+  if (inputNumber < 1000) inputResult = handleNumbersSmallerThanOneThousand(digitsBeforeDecimal || inputNumber, level);
+  else inputResult = handleNumbersLargerThanOneThousand(digitsBeforeDecimal || inputNumber, level);
 
-  result.push(inputResult);
+  if (inputResult?.length) result.push(inputResult);
+
+  if (decimalResult) {
+    if (digitsBeforeDecimal === 0) result.push('صفر');
+    result.push('ممیز');
+    result.push(decimalResult);
+    result.push(decimalSuffix);
+  }
 
   return result.join(' ');
 };
@@ -141,34 +164,14 @@ export const convertDigitsToWords = (
   // The handler is a separate function because the level argument in the handler is something internal that
   // The user should not access/modify.
   let result = convertDigitsToWordsHandler(input);
-  let decimalResult;
-  let decimalSuffix;
-
-  const inputString = input.toString();
-  // If the number contains dot, it means that it's a decimal.
-  if (inputString.includes('.')) {
-    const indexOfDecimal = inputString.indexOf('.');
-    // indexOfDecimal plus one must be used because we want the digits after the dot
-    const digitsAfterDecimal = inputString.substring(indexOfDecimal + 1, indexOfDecimal + decimals.length + 1);
-    const digitsBeforeDecimal = inputString.substring(0, indexOfDecimal);
-    // This checks if the digitsAfterDecimal is not 0 by converting it to a number.
-    // For example, if given "1.0000", it will still be counted as a single 0.
-    if (Number(digitsAfterDecimal) !== 0) {
-      result = convertDigitsToWordsHandler(digitsBeforeDecimal);
-      decimalResult = convertDigitsToWordsHandler(digitsAfterDecimal);
-      decimalSuffix = decimals[digitsAfterDecimal.length - 1];
-    }
-  }
 
   // If the result is less than 1 character, it means that there was no result.
   if (result.length < 1) return handleInvalidInput(input, options.throwErrorIfInvalid);
 
-  if (decimalResult) result += ` ممیز ${decimalResult} ${decimalSuffix}`;
-
   // For zero and negative numbers, ordinal is meaningless. (For example منفی دوم is meaningless)
   // For decimal numbers, ordinal is also meaningless.
   // So we just return the cardinal number if that is the case.
-  if (options.ordinal !== true || input <= 0 || decimalResult !== undefined) return result;
+  if (options.ordinal !== true || input <= 0 || input.toString().includes('.')) return result;
 
   const resultSplit = result.split(' ');
 
@@ -178,14 +181,5 @@ export const convertDigitsToWords = (
 
   return resultSplit.join(' ');
 };
-
-// اول
-// دوم
-// سوم
-// چهارم
-// پنجم
-// ده + م
-// یازده + م
-// بیست + م
 
 // TODO: refactor this tool
