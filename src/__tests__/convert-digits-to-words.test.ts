@@ -34,6 +34,7 @@ test('Convert Number To Persian Words With Persian Digits As Input', () => {
   expect(convertDigitsToWords('۱۲۰۰')).toBe('یک هزار و دویست');
   expect(convertDigitsToWords('۱.۲')).toBe('یک ممیز دو دهم');
   expect(convertDigitsToWords('۱۲۳.۰')).toBe('یکصد و بیست و سه');
+  expect(convertDigitsToWords('۱.۰۰۰۰')).toBe('یک');
   expect(convertDigitsToWords('۲۳.۲۳')).toBe('بیست و سه ممیز بیست و سه صدم');
   expect(convertDigitsToWords('۰.۱۰۰۰۰')).toBe('صفر ممیز یک دهم');
   expect(convertDigitsToWords('۰.۰۰۰۱')).toBe('صفر ممیز یک ده هزارم');
@@ -62,6 +63,7 @@ test('Convert Number With Decimals To Persian Words With Ordinal Enabled', () =>
   // ordinal: true with decimal numbers should return the cardinal number and not the ordinal number
   // Because ordinal numbers can't be defined with decimals
   expect(convertDigitsToWords(123.1, { ordinal: true })).toBe('یکصد و بیست و سه ممیز یک دهم');
+  expect(convertDigitsToWords(123.0, { ordinal: true })).toBe('یکصد و بیست و سوم');
 });
 
 test('Throw Error In Case Of Invalid Input With throwErrorIfInvalid Enabled', () => {
