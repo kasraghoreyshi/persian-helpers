@@ -167,7 +167,7 @@ export const convertDigitsToWords = (
 
   // The handler is a separate function because the level argument in the handler is something internal that
   // The user should not access/modify.
-  let result = convertDigitsToWordsHandler(input);
+  const result = convertDigitsToWordsHandler(input);
 
   // If the result is less than 1 character, it means that there was no result.
   if (result.length < 1) return handleInvalidInput(input, options.throwErrorIfInvalid);
