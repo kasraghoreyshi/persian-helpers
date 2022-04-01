@@ -68,7 +68,9 @@ const convertDigitsToWordsHandler = (input: string | number, level: number = 0):
   if (isNaN(inputNumber)) return '';
 
   let digitsBeforeDecimal: number | null = null;
+  // The result for the decimal digits if the number is a float
   let decimalResult;
+  // The suffix for the decimal which can be: دهم صدم هزارم etc
   let decimalSuffix;
 
   const inputString = inputNumber.toString();
@@ -109,6 +111,8 @@ const convertDigitsToWordsHandler = (input: string | number, level: number = 0):
 
   let inputResult: string;
 
+  // If the number includes a decimal, we want to convert the digits before the decimal to persian.
+  // Because the digits after the decimal are already handled
   if (inputNumber < 1000) inputResult = handleNumbersSmallerThanOneThousand(digitsBeforeDecimal || inputNumber, level);
   else inputResult = handleNumbersLargerThanOneThousand(digitsBeforeDecimal || inputNumber, level);
 
