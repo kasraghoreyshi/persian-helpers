@@ -13,19 +13,19 @@ test('Convert Number To Persian Words', () => {
   expect(convertDigitsToWords(1500000)).toBe('یک میلیون و پانصد هزار');
   expect(convertDigitsToWords(1.2)).toBe('یک ممیز دو دهم');
   expect(convertDigitsToWords(0.5)).toBe('صفر ممیز پنج دهم');
+  expect(convertDigitsToWords(15.99)).toBe('پانزده ممیز نود و نه صدم');
   expect(convertDigitsToWords(123.1)).toBe('یکصد و بیست و سه ممیز یک دهم');
   expect(convertDigitsToWords(123.0)).toBe('یکصد و بیست و سه');
   expect(convertDigitsToWords(123.15)).toBe('یکصد و بیست و سه ممیز پانزده صدم');
   expect(convertDigitsToWords(123.15)).toBe('یکصد و بیست و سه ممیز پانزده صدم');
-  expect(convertDigitsToWords(123.1566)).toBe('یکصد و بیست و سه ممیز یک هزار و پانصد و شصت و شش ده هزارم');
-  expect(convertDigitsToWords(123.16226289728728632763725367545473548776)).toBe(
+  expect(convertDigitsToWords('123.16226289728728632763725367545473548776')).toBe(
     'یکصد و بیست و سه ممیز یکصد و شصت و دو هزار و دویست و شصت و دو میلیونیم',
   );
-  expect(convertDigitsToWords('23.3333as')).toBe('بیست و سه');
-
-  expect(convertDigitsToWords('23.sisjoh3333')).toBe('بیست و سه');
   expect(convertDigitsToWords('23.')).toBe('بیست و سه');
-  expect(convertDigitsToWords(`23.${undefined}`)).toBe('بیست و سه');
+
+  expect(convertDigitsToWords('23.3333as')).toBeUndefined();
+  expect(convertDigitsToWords('23.sisjoh3333')).toBeUndefined();
+  expect(convertDigitsToWords(`23.${undefined}`)).toBeUndefined();
   expect(convertDigitsToWords('2aasa3.3')).toBeUndefined();
 });
 
@@ -33,7 +33,12 @@ test('Convert Number To Persian Words With Persian Digits As Input', () => {
   expect(convertDigitsToWords('۱۲۳۴')).toBe('یک هزار و دویست و سی و چهار');
   expect(convertDigitsToWords('۱۲۰۰')).toBe('یک هزار و دویست');
   expect(convertDigitsToWords('۱.۲')).toBe('یک ممیز دو دهم');
-  expect(convertDigitsToWords('23.۲۳')).toBe('بیست و سه ممیز بیست و سه صدم');
+  expect(convertDigitsToWords('۱۲۳.۰')).toBe('یکصد و بیست و سه');
+  expect(convertDigitsToWords('۱.۰۰۰۰')).toBe('یک');
+  expect(convertDigitsToWords('۲۳.۲۳')).toBe('بیست و سه ممیز بیست و سه صدم');
+  expect(convertDigitsToWords('۰.۱۰۰۰۰')).toBe('صفر ممیز یک دهم');
+  expect(convertDigitsToWords('۰.۰۰۰۱')).toBe('صفر ممیز یک ده هزارم');
+  expect(convertDigitsToWords('۲.۰۰۰۰۰۰۰۰۰۰۰۰۱')).toBe('دو');
 });
 
 test('Convert Number To Persian Words With Ordinal Enabled', () => {
@@ -58,6 +63,7 @@ test('Convert Number With Decimals To Persian Words With Ordinal Enabled', () =>
   // ordinal: true with decimal numbers should return the cardinal number and not the ordinal number
   // Because ordinal numbers can't be defined with decimals
   expect(convertDigitsToWords(123.1, { ordinal: true })).toBe('یکصد و بیست و سه ممیز یک دهم');
+  expect(convertDigitsToWords(123.0, { ordinal: true })).toBe('یکصد و بیست و سوم');
 });
 
 test('Throw Error In Case Of Invalid Input With throwErrorIfInvalid Enabled', () => {
