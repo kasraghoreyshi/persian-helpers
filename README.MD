@@ -3,6 +3,11 @@
 
 # Persian Helpers
 
+<p align="end">
+  <img alt="Intended Runtime Environment: Node.js" src="https://persian-badge.iran.liara.run/api/badge/NodeJS-43853D?style=flat&logo=nodedotjs&logoColor=white">
+  <img alt="Star" src="https://persian-badge.iran.liara.run/api/github/stars/kasraghoreyshi/persian-helpers">
+ <img alt="persian-helpers NPM Version" src="https://persian-badge.iran.liara.run/api/npm/v/persian-helpers?style=flat&label=persian-helpers&logo=npm&logoColor=white">
+</p>
   
 
 > Persian Helpers is a minimal NodeJS package with a set of helpers/tools specifically for the Persian/Farsi language.
